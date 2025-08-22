@@ -6,3 +6,7 @@
 /test/UnitTest.LMS.Service/obj
 /src/Web.LMS.Service/obj
 *.user
+/src/Infrastructure.LMS.Service/bin/Debug/net8.0
+/src/Infrastructure.LMS.Service/obj
+/src/Web.LMS.Service/bin/Debug/net8.0
+/src/Web.LMS.Service/src/obj

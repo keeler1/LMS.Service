@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: lms-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: MteGAstBNghUpo1nKWq5
+      MYSQL_DATABASE: LibraryDb
+      MYSQL_USER: lmsuser
+      MYSQL_PASSWORD: dK8bwtG05DMT9GF6MVo7
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  sqlserver-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: lms-sqlserver
+    restart: always
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "V3kBaooBhK4R8Tjye17q"
+    ports:
+      - "1435:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+volumes:
+  mysql_data:
+  sqlserver_data:

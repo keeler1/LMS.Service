@@ -1,4 +1,7 @@
 
+using Infrastructure.LMS.Service;
+using Microsoft.EntityFrameworkCore;
+
 namespace Web.LMS.Service
 {
     public class Program
@@ -13,6 +16,22 @@ namespace Web.LMS.Service
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            var provider = builder.Configuration.GetValue<string>("DatabaseProvider");
+
+            if (provider == "SqlServer")
+            {
+                builder.Services.AddDbContext<AppDbContext>(options =>
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
+            }
+            else if (provider == "MySql")
+            {
+                builder.Services.AddDbContext<AppDbContext>(options =>
+                    options.UseMySql(
+                        builder.Configuration.GetConnectionString("MySql"),
+                        new MySqlServerVersion(new Version(8, 0, 39))
+                    ));
+            }
 
             var app = builder.Build();
 
